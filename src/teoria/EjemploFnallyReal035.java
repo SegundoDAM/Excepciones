@@ -27,6 +27,13 @@ public class EjemploFnallyReal035 {
 	    	} catch (IOException e) {
 	    		System.err.println("Error al leer el archivo: " + e.getMessage());
 	    		//Un fallo en este try evitaria la ejecucion del segundo try
+	    		
+	    		/***
+	    		 * El error que tenemos en clase es porque la excepcion nullpointer
+	    		 * (es la que tira el codigo)
+	    		 * no es hija de IOException, que es la que solicita el el metodo close
+	    		 * Para evitarlo recogemos el tipo de Exception que es padre de ambas
+	    		 */
 	    	} finally {
 	    		try {
 	    			System.out.println("cerrando");
@@ -34,13 +41,15 @@ public class EjemploFnallyReal035 {
 	    				System.out.println("cerre el segundo");
 	    				brDos.close();
 	    			}
-	    		} catch (IOException e) {
+	    		} catch (Exception e) {
+//	    		} catch (IOException e) {
 	    			System.err.println("Error al cerrar el archivo: " + e.getMessage());
 	    		}
 	    		try {
 	    			System.out.println("cerre el primero");
 					br.close();
-				} catch (IOException ex) {
+//				} catch (IOException ex) {
+				} catch (Exception ex) {
 					ex.printStackTrace();
 				} // Cerrar el archivo
 	    	}
